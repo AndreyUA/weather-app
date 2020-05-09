@@ -1,8 +1,9 @@
-import { combineReducers } from 'redux';
-import { informIsError, informIsLoading, ip } from './reducers';
+import { combineReducers } from "redux";
+import { informIsError, informIsLoading, ip, weather } from "./reducers";
 
 export default combineReducers({
-    informIsError,
-    informIsLoading,
-    ip
+  informIsError,
+  informIsLoading,
+  ip,
+  weather,
 });

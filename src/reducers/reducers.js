@@ -25,3 +25,13 @@ export function ip(state = {}, action) {
       return state;
   }
 }
+
+export function weather(state = {}, action) {
+  switch (action.type) {
+    case "WEATHER_FETCH_DATA_SUCCESS":
+      console.log(action.weather);
+      return action.weather;
+    default:
+      return state;
+  }
+}
