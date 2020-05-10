@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { informFetchData, weatherFetchData } from "../actions/actions";
+import "./App.css";
+
+import Loader from "./Loader";
+import Container from "./Container";
 
 class App extends React.Component {
   componentDidMount() {
@@ -30,10 +34,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
-        <p className="txt">{this.props.ip.countryCode}</p>
-        <p className="txt">{this.props.weather.timezone}</p>
-      </>
+      <div className="wrapper">
+        {this.props.weather.sunrise ? (
+          <Container
+            weather={this.props.weather}
+            ip={this.props.ip}
+            getCorrectedTimeZone={this.props.getCorrectedTimeZone}
+          />
+        ) : (
+          <Loader />
+        )}
+      </div>
     );
   }
 }
