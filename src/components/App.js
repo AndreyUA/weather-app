@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { informFetchData, weatherFetchData } from "../actions/actions";
+import { informFetchData, weatherFetchData, langDocument } from "../actions/actions";
 import "./App.css";
 
 import Loader from "./Loader";
@@ -16,7 +16,13 @@ class App extends React.Component {
     //fetch for weather data after receive ip api answer
     if (this.props.ip !== prevProps.ip) {
       this.props.fetchWeather(
-        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=ru`
+        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
+      );
+    }
+
+    if (this.props.lang !== prevProps.lang) {
+      this.props.fetchWeather(
+        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
       );
     }
   }
@@ -40,6 +46,7 @@ class App extends React.Component {
             weather={this.props.weather}
             ip={this.props.ip}
             getCorrectedTimeZone={this.props.getCorrectedTimeZone}
+            langDocument={this.props.langDocument}
           />
         ) : (
           <Loader />
@@ -56,6 +63,7 @@ const mapStateToProps = (state) => {
     ip: state.ip,
     isError: state.isError,
     isLoading: state.isLoading,
+    lang: state.lang,
   };
 };
 
@@ -64,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: (url) => dispatch(informFetchData(url)),
     fetchWeather: (url) => dispatch(weatherFetchData(url)),
+    langDocument: (str) => dispatch(langDocument(str)),
   };
 };
 

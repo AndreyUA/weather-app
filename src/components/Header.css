@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+}
+
+.header-language-point {
+    margin: 0 .6rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.header-info {
+    margin-left: 2rem;
+    font-size: 26px;
+}
+
+.language-active {
+    color: #ff0000;
+}

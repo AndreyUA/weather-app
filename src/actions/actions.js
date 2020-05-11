@@ -97,3 +97,14 @@ export function weatherFetchData(url) {
 }
 
 //for weather request END
+
+//for lang START
+
+export function langDocument(str) {
+  return {
+    type: 'CHANGING_LANGUAGE',
+    lang: str
+  }
+}
+
+//for lang END

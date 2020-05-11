@@ -35,3 +35,12 @@ export function weather(state = {}, action) {
       return state;
   }
 }
+
+export function lang(state = { lang: "ru" }, action) {
+  switch (action.type) {
+    case "CHANGING_LANGUAGE":
+      return action.lang;
+    default:
+      return state;
+  }
+}
