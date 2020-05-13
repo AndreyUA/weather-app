@@ -18,3 +18,35 @@
 .footer-location {
     text-align: center;
 }
+
+@media (max-width: 770px) {
+    .container {
+        max-width: none;
+        min-width: 0;
+        width: 96%;
+        height: 60%;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        height: 78%;
+    }
+}
+
+@media (max-width: 350px) {
+    .container {
+        height: 98%;
+    }
+}
+
+/*mobile*/
+
+@media (max-height: 500px) {
+    .container {
+        max-width: none;
+        min-width: 0;
+        width: 60%;
+        height: 98%;
+    }
+  }

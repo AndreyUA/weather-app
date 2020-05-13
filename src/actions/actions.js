@@ -100,10 +100,10 @@ export function weatherFetchData(url) {
 
 //for lang START
 
-export function langDocument(str) {
+export function langDocument(lang) {
   return {
     type: 'CHANGING_LANGUAGE',
-    lang: str
+    lang
   }
 }
 

@@ -4,21 +4,28 @@
     justify-content: space-between;
     align-items: center;
     height: 10%;
-}
-
-.header-language-point {
-    margin: 0 .6rem;
+  }
+  
+  .header-language-point {
+    margin: 0 0.6rem;
     text-decoration: none;
     color: inherit;
     font-weight: 900;
     font-size: 30px;
-}
-
-.header-info {
+  }
+  
+  .header-info {
     margin-left: 2rem;
     font-size: 26px;
-}
-
-.language-active {
+  }
+  
+  .language-active {
     color: #ff0000;
-}
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 770px) {
+    .header-info {
+      font-size: 18px;
+    }
+  }

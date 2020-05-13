@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { informFetchData, weatherFetchData, langDocument } from "../actions/actions";
+import {
+  informFetchData,
+  weatherFetchData,
+  langDocument,
+} from "../actions/actions";
 import "./App.css";
 
 import Loader from "./Loader";
@@ -10,6 +14,7 @@ class App extends React.Component {
   componentDidMount() {
     //fetch for ip data
     this.props.fetchData(`http://ip-api.com/json`);
+    console.log(this.props);
   }
 
   componentDidUpdate(prevProps) {
@@ -43,6 +48,7 @@ class App extends React.Component {
       <div className="wrapper">
         {this.props.weather.sunrise ? (
           <Container
+            lang={this.props.lang}
             weather={this.props.weather}
             ip={this.props.ip}
             getCorrectedTimeZone={this.props.getCorrectedTimeZone}

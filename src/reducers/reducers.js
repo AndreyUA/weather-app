@@ -36,7 +36,7 @@ export function weather(state = {}, action) {
   }
 }
 
-export function lang(state = { lang: "ru" }, action) {
+export function lang(state = "ru", action) {
   switch (action.type) {
     case "CHANGING_LANGUAGE":
       return action.lang;

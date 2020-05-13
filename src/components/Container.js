@@ -18,13 +18,14 @@ export default class Container extends React.Component {
     return (
       <div className="container">
         <Header
+          lang={this.props.lang}
           weather={this.props.weather}
           sunrise={this.getCorrectedTimeZone(this.props.weather.sunrise)}
           sunset={this.getCorrectedTimeZone(this.props.weather.sunset)}
           langDocument={this.props.langDocument}
         />
 
-        <Body weather={this.props.weather} />
+        <Body lang={this.props.lang} weather={this.props.weather} />
 
         <div className="footer">
           <p className="footer-location">
