@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import "./HeaderDaily.css";
 
 export default class Header extends React.Component {
   handleLangChange = (e) => {
@@ -13,15 +13,7 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <div className="header">
-        <div className="header-info">
-          <p className="header-info-txt">
-            {this.props.lang.toLowerCase() === "ru" ? "Восход: " : "Sunrise: "}
-            {this.props.weather.sunrise ? this.props.sunrise : "00:00"},
-            {this.props.lang.toLowerCase() === "ru" ? " заход: " : " sunset: "}
-            {this.props.weather.sunset ? this.props.sunset : "00:00"}
-          </p>
-        </div>
+      <div className="header-daily">
         <div className="header-language">
           <a
             onClick={this.handleLangChange}

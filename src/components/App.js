@@ -4,17 +4,18 @@ import {
   informFetchData,
   weatherFetchData,
   langDocument,
+  weatherDailyFetchData,
 } from "../actions/actions";
 import "./App.css";
 
 import Loader from "./Loader";
 import Container from "./Container";
+import ContainerDaily from "./ContainerDaily";
 
 class App extends React.Component {
   componentDidMount() {
     //fetch for ip data
     this.props.fetchData(`http://ip-api.com/json`);
-    console.log(this.props);
   }
 
   componentDidUpdate(prevProps) {
@@ -23,12 +24,21 @@ class App extends React.Component {
       this.props.fetchWeather(
         `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
       );
+
+      this.props.weatherDailyFetchData(
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=24&lang=${this.props.lang}`
+      );
     }
 
     if (this.props.lang !== prevProps.lang) {
       this.props.fetchWeather(
         `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
       );
+
+      this.props.weatherDailyFetchData(
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=24&lang=${this.props.lang}`
+      );
+      console.log(this.props.dailyWeather[3].wind_cdir);
     }
   }
 
@@ -44,20 +54,43 @@ class App extends React.Component {
   //weather api
 
   render() {
+    const nowShow = this.props.ip ? (
+      this.props.weather.sunrise ? (
+        <Container
+          lang={this.props.lang}
+          weather={this.props.weather}
+          ip={this.props.ip}
+          getCorrectedTimeZone={this.props.getCorrectedTimeZone}
+          langDocument={this.props.langDocument}
+          current={this.props.current}
+          dailyWeather={this.props.dailyWeather}
+          weatherDailyFetchData={this.props.weatherDailyFetchData}
+        />
+      ) : (
+        <Loader />
+      )
+    ) : (
+      <Loader />
+    );
+    const altShow = this.props.ip ? (
+      this.props.dailyWeather[0] ? (
+        <ContainerDaily
+          lang={this.props.lang}
+          ip={this.props.ip}
+          langDocument={this.props.langDocument}
+          current={this.props.current}
+          dailyWeather={this.props.dailyWeather}
+          weatherDailyFetchData={this.props.weatherDailyFetchData}
+        />
+      ) : (
+        <Loader />
+      )
+    ) : (
+      <Loader />
+    );
+
     return (
-      <div className="wrapper">
-        {this.props.weather.sunrise ? (
-          <Container
-            lang={this.props.lang}
-            weather={this.props.weather}
-            ip={this.props.ip}
-            getCorrectedTimeZone={this.props.getCorrectedTimeZone}
-            langDocument={this.props.langDocument}
-          />
-        ) : (
-          <Loader />
-        )}
-      </div>
+      <div className="wrapper">{this.props.current ? nowShow : altShow}</div>
     );
   }
 }
@@ -66,10 +99,14 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     weather: state.weather,
+    isWeatherError: state.isWeatherError,
+    isWeatherLoading: state.isWeatherLoading,
     ip: state.ip,
     isError: state.isError,
     isLoading: state.isLoading,
     lang: state.lang,
+    current: state.current,
+    dailyWeather: state.dailyWeather,
   };
 };
 
@@ -79,6 +116,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchData: (url) => dispatch(informFetchData(url)),
     fetchWeather: (url) => dispatch(weatherFetchData(url)),
     langDocument: (str) => dispatch(langDocument(str)),
+    weatherDailyFetchData: (url) => dispatch(weatherDailyFetchData(url)),
   };
 };
 

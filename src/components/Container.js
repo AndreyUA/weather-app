@@ -15,6 +15,7 @@ export default class Container extends React.Component {
     }
   };
   render() {
+
     return (
       <div className="container">
         <Header
@@ -24,8 +25,7 @@ export default class Container extends React.Component {
           sunset={this.getCorrectedTimeZone(this.props.weather.sunset)}
           langDocument={this.props.langDocument}
         />
-
-        <Body lang={this.props.lang} weather={this.props.weather} />
+        <Body lang={this.props.lang} weather={this.props.weather} />{" "}
 
         <div className="footer">
           <p className="footer-location">

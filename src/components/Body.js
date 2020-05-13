@@ -5,6 +5,17 @@ export default function Body(props) {
   const pres = +props.weather.pres / 1.333;
   const humidityRu = <span>Отн. влажность:</span>;
   const humidityEn = <span>Rel. humidity:</span>;
+  const mmPresRu = (
+    <span>
+      мм <br /> рт. ст.
+    </span>
+  );
+  const mmPresEn = (
+    <span>
+      <br />
+      mmHg
+    </span>
+  );
 
   return (
     <div className="body">
@@ -46,7 +57,8 @@ export default function Body(props) {
           </p>
           <p className="info-txt">
             {props.weather.wind_cdir_full}, <br />{" "}
-            {props.weather.wind_spd.toFixed(2)} <span>м/с</span>
+            {props.weather.wind_spd.toFixed(2)}{" "}
+            <span>{props.lang.toLowerCase() === "ru" ? "м/с" : "m/s"}</span>
           </p>
         </div>
 
@@ -55,7 +67,8 @@ export default function Body(props) {
             {props.lang.toLowerCase() === "ru" ? "Видимость:" : "Visibility:"}
           </p>
           <p className="info-txt">
-            {props.weather.vis.toFixed(2)} <span>км</span>
+            {props.weather.vis.toFixed(2)}{" "}
+            <span>{props.lang.toLowerCase() === "ru" ? "км" : "km"}</span>
           </p>
         </div>
 
@@ -76,9 +89,7 @@ export default function Body(props) {
           </p>
           <p className="info-txt">
             {+pres.toFixed(0)}{" "}
-            <span>
-              мм <br /> рт. ст.
-            </span>
+            {props.lang.toLowerCase() === "ru" ? mmPresRu : mmPresEn}
           </p>
         </div>
 

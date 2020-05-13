@@ -88,3 +88,27 @@
       font-size: 14px;
     }
   }
+
+  @media (max-height: 500px) {
+    .body-main {
+      margin: 0;
+    }
+
+    .body-main {
+      font-size: 26px;
+  }
+
+    .info-main {
+      margin: 0;
+      font-size: 15px;
+  }
+
+  .info-txt {
+    font-size: 12px;
+}
+
+.pic {
+  height: 90px;
+  width: 90px;
+}
+  }

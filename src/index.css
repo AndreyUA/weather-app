@@ -28,3 +28,12 @@ code {
   transition: 0.4s all ease-in;
   */
 }
+
+/*mobile*/
+/*
+@media (max-height: 500px) {
+  .wrapper {
+    height: 200vh;
+  }
+}
+*/
