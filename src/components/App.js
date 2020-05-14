@@ -5,6 +5,7 @@ import {
   weatherFetchData,
   langDocument,
   weatherDailyFetchData,
+  currentShow,
 } from "../actions/actions";
 import "./App.css";
 
@@ -26,7 +27,7 @@ class App extends React.Component {
       );
 
       this.props.weatherDailyFetchData(
-        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=24&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
       );
     }
 
@@ -36,9 +37,8 @@ class App extends React.Component {
       );
 
       this.props.weatherDailyFetchData(
-        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=24&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
       );
-      console.log(this.props.dailyWeather[3].wind_cdir);
     }
   }
 
@@ -65,6 +65,7 @@ class App extends React.Component {
           current={this.props.current}
           dailyWeather={this.props.dailyWeather}
           weatherDailyFetchData={this.props.weatherDailyFetchData}
+          currentShow={this.props.currentShow}
         />
       ) : (
         <Loader />
@@ -81,6 +82,7 @@ class App extends React.Component {
           current={this.props.current}
           dailyWeather={this.props.dailyWeather}
           weatherDailyFetchData={this.props.weatherDailyFetchData}
+          currentShow={this.props.currentShow}
         />
       ) : (
         <Loader />
@@ -117,6 +119,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchWeather: (url) => dispatch(weatherFetchData(url)),
     langDocument: (str) => dispatch(langDocument(str)),
     weatherDailyFetchData: (url) => dispatch(weatherDailyFetchData(url)),
+    currentShow: (bool) => dispatch(currentShow(bool)),
   };
 };
 

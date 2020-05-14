@@ -61,7 +61,7 @@ export function lang(state = "ru", action) {
   }
 }
 
-export function current(state = false, action) {
+export function current(state = true, action) {
   switch (action.type) {
     case "SHOW_CURRENT":
       return action.currentWeather;

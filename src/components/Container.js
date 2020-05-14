@@ -14,8 +14,12 @@ export default class Container extends React.Component {
       return (correctedTime = `${arg[0]}${+arg[1] + delta}${arg.slice(2)}`);
     }
   };
-  render() {
 
+  handleCurrentChange = (e) => {
+    e.preventDefault();
+    this.props.currentShow(!this.props.current);
+  };
+  render() {
     return (
       <div className="container">
         <Header
@@ -26,8 +30,10 @@ export default class Container extends React.Component {
           langDocument={this.props.langDocument}
         />
         <Body lang={this.props.lang} weather={this.props.weather} />{" "}
-
         <div className="footer">
+          <a className="switchMenu" onClick={this.handleCurrentChange} href="#">
+            {this.props.lang.toLowerCase() === "ru" ? "Почасово" : "Hourly"}
+          </a>
           <p className="footer-location">
             {this.props.ip.country}, {this.props.ip.city}. IP:{" "}
             {this.props.ip.query}

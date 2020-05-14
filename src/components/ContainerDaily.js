@@ -1,9 +1,15 @@
 import React from "react";
 import "./Container.css";
+import "./ContainerDaily.css";
 import HeaderDaily from "./HeaderDaily";
 import BodyDaily from "./BodyDaily";
 
 export default class ContainerDaily extends React.Component {
+  handleCurrentChange = (e) => {
+    e.preventDefault();
+    this.props.currentShow(!this.props.current);
+  };
+
   render() {
     const dailyWeather = (
       <>
@@ -24,6 +30,9 @@ export default class ContainerDaily extends React.Component {
         {dailyWeather}
 
         <div className="footer">
+          <a className="switchMenu" onClick={this.handleCurrentChange} href="#">
+            {this.props.lang.toLowerCase() === "ru" ? "Сейчас" : "Now"}
+          </a>
           <p className="footer-location">
             {this.props.ip.country}, {this.props.ip.city}. IP:{" "}
             {this.props.ip.query}
