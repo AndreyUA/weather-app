@@ -16,7 +16,8 @@ import ContainerDaily from "./ContainerDaily";
 class App extends React.Component {
   componentDidMount() {
     //fetch for ip data
-    this.props.fetchData(`http://ip-api.com/json`);
+    //need to change ip-adress to geolocation for coordinats
+    this.props.fetchData(`//ip-api.com/json`);
   }
 
   componentDidUpdate(prevProps) {
