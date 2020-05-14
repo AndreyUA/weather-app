@@ -1,0 +1,45 @@
+.footer {
+  position: relative;
+}
+
+.footer-location {
+  text-align: right;
+  margin-right: 60px;
+}
+
+.switchMenu {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 30px;
+  color: #ff0000;
+  padding: 1px;
+  border: 2px solid #ff0000;
+  border-radius: 6%;
+}
+
+@media (max-width: 500px) {
+  .footer-location {
+    position: absolute;
+    bottom: 16px;
+    right: 2px;
+    margin: 0;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 350px) {
+  .switchMenu {
+    font-size: 16px;
+    bottom: 10px;
+  }
+}
+
+@media (max-height: 500px) {
+  .switchMenu {
+    font-size: 16px;
+    left: 36px;
+  }
+}
