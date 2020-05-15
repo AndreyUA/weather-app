@@ -1,4 +1,4 @@
-//for ip request START
+//for coordinates request START
 
 export function informIsError(bool) {
   return {
@@ -7,45 +7,29 @@ export function informIsError(bool) {
   };
 }
 
-export function informIsLoading(bool) {
+export function informCoordinatesDataSuccess(coordinates) {
   return {
-    type: "INFORM_IS_LOADING",
-    isLoading: bool,
+    type: "INFORM_COORDINATES_DATA_SUCCESS",
+    coordinates,
   };
 }
 
-export function informFetchDataSuccess(ip) {
-  return {
-    type: "INFORM_FETCH_DATA_SUCCESS",
-    ip,
-  };
-}
-
-export function informFetchData(url) {
+export function informCoordinatesData() {
   return (dispatch) => {
-    dispatch(informIsLoading(true));
+    function success(position) {
+      dispatch(informCoordinatesDataSuccess(position));
+    }
 
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-
-        dispatch(informIsLoading(false));
-
-        return response;
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((ip) => {
-        dispatch(informFetchDataSuccess(ip));
-      })
-      .catch(() => dispatch(informIsError(true)));
+    if (!navigator.geolocation) {
+      dispatch(informIsError(true));
+    } else {
+      navigator.geolocation.getCurrentPosition(success);
+      console.log("done");
+    }
   };
 }
 
-//for ip request END
+//for coordinates request END
 
 //for weather request START
 

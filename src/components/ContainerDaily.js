@@ -34,8 +34,7 @@ export default class ContainerDaily extends React.Component {
             {this.props.lang.toLowerCase() === "ru" ? "Сейчас" : "Now"}
           </a>
           <p className="footer-location">
-            {this.props.ip.country}, {this.props.ip.city}. IP:{" "}
-            {this.props.ip.query}
+            {this.props.weather.country_code}, {this.props.weather.city_name}.
           </p>
         </div>
       </div>

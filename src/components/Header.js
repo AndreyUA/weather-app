@@ -5,11 +5,8 @@ export default class Header extends React.Component {
   handleLangChange = (e) => {
     e.preventDefault();
     this.props.langDocument(e.target.textContent.toLowerCase());
+    console.log(this.props.weather);
   };
-
-  //нужно разобраться с запросом. почему-то начало запрашивать английский json
-  //и еще нужно разобраться с подсветкой языка
-  //а дальше только адаптивную версию и готово
 
   render() {
     return (

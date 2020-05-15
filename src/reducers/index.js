@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
 import {
   informIsError,
-  informIsLoading,
-  ip,
+  coordinates,
   weather,
   weatherIsError,
   weatherIsLoading,
@@ -13,8 +12,7 @@ import {
 
 export default combineReducers({
   informIsError,
-  informIsLoading,
-  ip,
+  coordinates,
   weather,
   weatherIsError,
   weatherIsLoading,

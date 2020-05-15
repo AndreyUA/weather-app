@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  informFetchData,
+  informCoordinatesData,
   weatherFetchData,
   langDocument,
   weatherDailyFetchData,
@@ -15,30 +15,30 @@ import ContainerDaily from "./ContainerDaily";
 
 class App extends React.Component {
   componentDidMount() {
-    //fetch for ip data
-    //need to change ip-adress to geolocation for coordinats
-    this.props.fetchData(`//ip-api.com/json`);
+    //get user's slocation
+    this.props.coordinatesData();
   }
 
   componentDidUpdate(prevProps) {
     //fetch for weather data after receive ip api answer
-    if (this.props.ip !== prevProps.ip) {
+    if (this.props.coordinates !== prevProps.coordinates) {
+      console.log(this.props);
       this.props.fetchWeather(
-        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
       );
 
       this.props.weatherDailyFetchData(
-        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
       );
     }
 
     if (this.props.lang !== prevProps.lang) {
       this.props.fetchWeather(
-        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
       );
 
       this.props.weatherDailyFetchData(
-        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.ip.lat}&lon=${this.props.ip.lon}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
       );
     }
   }
@@ -55,12 +55,11 @@ class App extends React.Component {
   //weather api
 
   render() {
-    const nowShow = this.props.ip ? (
+    const nowShow = this.props.coordinates ? (
       this.props.weather.sunrise ? (
         <Container
           lang={this.props.lang}
           weather={this.props.weather}
-          ip={this.props.ip}
           getCorrectedTimeZone={this.props.getCorrectedTimeZone}
           langDocument={this.props.langDocument}
           current={this.props.current}
@@ -74,12 +73,12 @@ class App extends React.Component {
     ) : (
       <Loader />
     );
-    const altShow = this.props.ip ? (
+    const altShow = this.props.coordinates ? (
       this.props.dailyWeather[0] ? (
         <ContainerDaily
           lang={this.props.lang}
-          ip={this.props.ip}
           langDocument={this.props.langDocument}
+          weather={this.props.weather}
           current={this.props.current}
           dailyWeather={this.props.dailyWeather}
           weatherDailyFetchData={this.props.weatherDailyFetchData}
@@ -104,7 +103,7 @@ const mapStateToProps = (state) => {
     weather: state.weather,
     isWeatherError: state.isWeatherError,
     isWeatherLoading: state.isWeatherLoading,
-    ip: state.ip,
+    coordinates: state.coordinates,
     isError: state.isError,
     isLoading: state.isLoading,
     lang: state.lang,
@@ -116,7 +115,7 @@ const mapStateToProps = (state) => {
 //redux actions for component
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (url) => dispatch(informFetchData(url)),
+    coordinatesData: (url) => dispatch(informCoordinatesData(url)),
     fetchWeather: (url) => dispatch(weatherFetchData(url)),
     langDocument: (str) => dispatch(langDocument(str)),
     weatherDailyFetchData: (url) => dispatch(weatherDailyFetchData(url)),

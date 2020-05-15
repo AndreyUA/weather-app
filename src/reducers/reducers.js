@@ -7,19 +7,10 @@ export function informIsError(state = false, action) {
   }
 }
 
-export function informIsLoading(state = false, action) {
+export function coordinates(state = {}, action) {
   switch (action.type) {
-    case "INFORM_IS_LOADING":
-      return action.isLoading;
-    default:
-      return state;
-  }
-}
-
-export function ip(state = {}, action) {
-  switch (action.type) {
-    case "INFORM_FETCH_DATA_SUCCESS":
-      return action.ip;
+    case "INFORM_COORDINATES_DATA_SUCCESS":
+      return action.coordinates;
     default:
       return state;
   }
