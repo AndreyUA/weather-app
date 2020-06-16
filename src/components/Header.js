@@ -5,7 +5,6 @@ export default class Header extends React.Component {
   handleLangChange = (e) => {
     e.preventDefault();
     this.props.langDocument(e.target.textContent.toLowerCase());
-    console.log(this.props.weather);
   };
 
   render() {

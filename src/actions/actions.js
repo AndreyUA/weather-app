@@ -24,7 +24,6 @@ export function informCoordinatesData() {
       dispatch(informIsError(true));
     } else {
       navigator.geolocation.getCurrentPosition(success);
-      console.log("done");
     }
   };
 }

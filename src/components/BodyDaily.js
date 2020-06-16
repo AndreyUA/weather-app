@@ -2,9 +2,6 @@ import React from "react";
 import "./BodyDaily.css";
 
 export default class BodyDaily extends React.Component {
-  componentDidMount() {
-    console.log(this.props.dailyWeather[1]);
-  }
 
   render() {
     let result = <p>Loadeing...</p>;

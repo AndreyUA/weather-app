@@ -13,6 +13,8 @@ import Loader from "./Loader";
 import Container from "./Container";
 import ContainerDaily from "./ContainerDaily";
 
+import { apiKey } from "../vars/vars";
+
 class App extends React.Component {
   componentDidMount() {
     //get user's slocation
@@ -22,23 +24,22 @@ class App extends React.Component {
   componentDidUpdate(prevProps) {
     //fetch for weather data after receive ip api answer
     if (this.props.coordinates !== prevProps.coordinates) {
-      console.log(this.props);
       this.props.fetchWeather(
-        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=${apiKey}&lang=${this.props.lang}`
       );
 
       this.props.weatherDailyFetchData(
-        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=${apiKey}&hours=25&lang=${this.props.lang}`
       );
     }
 
     if (this.props.lang !== prevProps.lang) {
       this.props.fetchWeather(
-        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/current?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=${apiKey}&lang=${this.props.lang}`
       );
 
       this.props.weatherDailyFetchData(
-        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=3e5b62ad8da34e2cb55ab71ceae765eb&hours=25&lang=${this.props.lang}`
+        `https://api.weatherbit.io/v2.0/forecast/hourly?&lat=${this.props.coordinates.coords.latitude}&lon=${this.props.coordinates.coords.longitude}&key=${apiKey}&hours=25&lang=${this.props.lang}`
       );
     }
   }
